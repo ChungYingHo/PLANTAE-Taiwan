@@ -9,5 +9,6 @@
 <style lang="scss">
 html {
   overflow-y: auto;
+  font-family: 'Noto Sans TC', sans-serif;
 }
 </style>

@@ -19,13 +19,20 @@ export default defineNuxtConfig({
       })
     },
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/stylelint-module'
+    '@nuxtjs/stylelint-module',
+    '@nuxtjs/google-fonts'
   ],
   vite: {
     vue: {
       template: {
         transformAssetUrls
       }
+    }
+  },
+  googleFonts: {
+    families: {
+      Ubuntu: true,
+      'Noto+Sans+TC': true
     }
   }
 })

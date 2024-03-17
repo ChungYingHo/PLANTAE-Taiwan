@@ -1,3 +1,14 @@
+<script setup lang="ts">
+useHead({
+  title: '植宇宙 | PLANTAE Taiwan',
+  meta: [{ name: 'description', content: '這是測試用網站' }],
+  bodyAttrs: {
+    class: 'test'
+  },
+  script: [{ innerHTML: 'console.log(`Hello world`)' }]
+})
+</script>
+
 <template>
   <NuxtLayout>
     <v-app>

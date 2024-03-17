@@ -14,7 +14,7 @@
 </template>
 
 <style scoped lang="scss">
-@mixin tooltip {
+/* @mixin tooltip {
   content: attr(data-content);
   position: absolute;
   top: 120%;
@@ -28,7 +28,7 @@
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
-}
+} */
 
 .emboss {
   box-shadow:
@@ -46,7 +46,7 @@
   }
 
   &::after {
-    @include tooltip;
+    /* @include tooltip; */
 
     width: calc(100% + 3rem);
   }

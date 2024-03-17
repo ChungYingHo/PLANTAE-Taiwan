@@ -1,46 +1,61 @@
 <script setup lang="ts">
-// @ts-ignore
-import book from '@/assets/icons/book.png'
-// @ts-ignore
-import news from '@/assets/icons/news.png'
-// @ts-ignore
-import shoppingCart from '@/assets/icons/shopping-cart.png'
-// @ts-ignore
-import order from '@/assets/icons/order.png'
+const route = useRoute()
 
-const btnList = [
-  {
-    name: '關於植宇宙',
-    src: book,
-    link: '/story'
-  },
-  {
-    name: '植宇宙手札',
-    src: news,
-    link: '/article'
-  },
-  {
-    name: '植宇宙雜貨店',
-    src: shoppingCart,
-    link: '/shop'
-  },
-  {
-    name: '訂單查詢',
-    src: order,
-    link: '/order'
-  }
-]
+const getIconColor = (path: string) => {
+  return path === route.path ? 'amber-darken-2' : 'blue-grey-darken-1'
+}
 </script>
 
 <template>
-  <div>111</div>
+  <div class="custom-container relative h-screen w-screen">
+    <div
+      class="btn-group absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-10"
+    >
+      <NuxtLink to="/">
+        <button class="btn relative rounded-2xl p-8" data-content="主頁">
+          <v-icon icon="mdi-home" size="x-large" :color="getIconColor('/')" />
+        </button>
+      </NuxtLink>
+      <NuxtLink to="/shop">
+        <button
+          class="btn relative rounded-2xl p-8"
+          data-content="植宇宙雜貨店"
+        >
+          <v-icon
+            icon="mdi-gift"
+            size="x-large"
+            :color="getIconColor('/shop')"
+          />
+        </button>
+      </NuxtLink>
+      <NuxtLink to="/shopping-cart">
+        <button class="btn relative rounded-2xl p-8" data-content="購物車">
+          <v-icon
+            icon="mdi-cart-variant"
+            size="x-large"
+            :color="getIconColor('/shopping-cart')"
+          />
+        </button>
+      </NuxtLink>
+      <NuxtLink to="/article">
+        <button class="btn relative rounded-2xl p-8" data-content="植宇宙手札">
+          <v-icon
+            icon="mdi-book-open-page-variant"
+            size="x-large"
+            :color="getIconColor('/article')"
+          />
+        </button>
+      </NuxtLink>
+    </div>
+    <slot />
+  </div>
 </template>
 
 <style scoped lang="scss">
 @mixin tooltip {
   content: attr(data-content);
   position: absolute;
-  top: 120%;
+  top: 102%;
   left: 50%;
   padding: 5px 10px;
   text-align: center;
@@ -57,12 +72,11 @@ const btnList = [
   background-color: transparent;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #e0e0e0;
   }
 
   &::after {
-    @include tooltip;
-
+    /* @include tooltip; */
     width: calc(100% + 3rem);
   }
 

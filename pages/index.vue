@@ -36,15 +36,17 @@ onMounted(() => {
       <div class="index-text-container flex flex-col items-center">
         <p class="index-title text-7xl font-extrabold">PLANTAE Taiwan</p>
         <p class="index-sub-title mt-4 text-5xl font-bold">植宇宙</p>
-        <p class="index-text mt-8 text-xl font-normal">
+        <p class="index-text mt-8 text-xl font-medium">
           植宇宙秉持著小農職人精神 <br />
           為您嚴選在地新鮮農產品 <br />
           致力開發特色手作商品 <br />
           獻給您，來自大自然的贈禮
         </p>
-        <button class="btn mt-20 rounded-full p-2">
-          <v-icon icon="mdi-chevron-down" color="blue-grey-darken-1"></v-icon>
-        </button>
+        <NuxtLink to="/shop">
+          <button class="btn mt-16 rounded-full p-2">
+            <v-icon icon="mdi-chevron-down" color="blue-grey-darken-1"></v-icon>
+          </button>
+        </NuxtLink>
       </div>
     </div>
 
@@ -90,9 +92,10 @@ onMounted(() => {
 
 .index-text {
   color: #b0b0b0;
-  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.5);
+  /* text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.5); */
   letter-spacing: 0.5rem;
   text-align: center;
+  line-height: 2.5rem;
 }
 
 .index-copyright {

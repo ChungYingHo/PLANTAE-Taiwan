@@ -3,6 +3,7 @@ import step1 from './shopping-cart/step1.vue'
 import step2 from './shopping-cart/step2.vue'
 import step3 from './shopping-cart/step3.vue'
 import step4 from './shopping-cart/step4.vue'
+import step5 from './shopping-cart/step5.vue'
 
 import { useCartStore } from '@/stores/userInfo'
 const useCart = useCartStore()
@@ -36,12 +37,84 @@ const updateCurrentStep = () => {
     case 4:
       currentStep.value = step4
       break
+    case 5:
+      currentStep.value = step5
+      break
     default:
       break
   }
 }
 
+// todo 驗證表單
+const validProduct = (products: any[]) => {
+  if (products.length === 0) {
+    return false
+  }
+  return true
+}
+
+const validName = (name: string) => {
+  if (name.length < 2) {
+    return false
+  }
+  return true
+}
+
+const validAddress = (address: string) => {
+  if (address.length < 5) {
+    return false
+  }
+  return true
+}
+
+const validPhone = (phone: string) => {
+  if (phone.length < 7) {
+    return false
+  }
+  return true
+}
+
+const validPay = (
+  paySelect: number,
+  introducer: string,
+  payAccount: string
+) => {
+  if (paySelect === 0 && introducer.length < 2) {
+    return false
+  }
+  if (paySelect === 1 && payAccount.length < 6) {
+    return false
+  }
+  return true
+}
+
+// step
 const handleNextStep = () => {
+  if (stepProgress.value === 1) {
+    if (!validProduct(useCart.cartData.products)) {
+      return
+    }
+  }
+  if (stepProgress.value === 2) {
+    if (
+      !validName(useCart.cartData.name) ||
+      !validAddress(useCart.cartData.address) ||
+      !validPhone(useCart.cartData.phone)
+    ) {
+      return
+    }
+  }
+  if (stepProgress.value === 3) {
+    if (
+      !validPay(
+        useCart.cartData.paySelect,
+        useCart.cartData.introducer,
+        useCart.cartData.payAccount
+      )
+    ) {
+      return
+    }
+  }
   stepProgress.value += 1
   updateCurrentStep()
   console.log(useCart.cartData)
@@ -92,9 +165,19 @@ const handlePrevStep = () => {
         size="x-large"
         :color="changeProgressColor(4)"
       />
+      <v-icon
+        icon="mdi-pan-right"
+        size="large"
+        :color="changeProgressColor(4)"
+      />
+      <v-icon
+        :icon="changeProgressIcon(5)"
+        size="x-large"
+        :color="changeProgressColor(5)"
+      />
     </div>
     <!-- 表單 -->
-    <div class="form-content flex-1">
+    <div class="form-content flex-1 pb-5">
       <KeepAlive>
         <component :is="currentStep"></component>
       </KeepAlive>
@@ -118,7 +201,7 @@ const handlePrevStep = () => {
         </template>
       </v-btn>
       <v-btn
-        v-show="stepProgress < 4"
+        v-show="stepProgress < 5"
         append-icon="mdi-chevron-right"
         @click="handleNextStep"
       >
@@ -127,7 +210,7 @@ const handlePrevStep = () => {
           <v-icon color="success"></v-icon>
         </template>
       </v-btn>
-      <v-btn v-show="stepProgress === 4" append-icon="mdi-check-circle-outline">
+      <v-btn v-show="stepProgress === 5" append-icon="mdi-check-circle-outline">
         確認訂單
         <template #append>
           <v-icon color="success"></v-icon>

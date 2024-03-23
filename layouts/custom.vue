@@ -4,22 +4,43 @@ const route = useRoute()
 const getIconColor = (path: string) => {
   return path === route.path ? 'amber-darken-2' : 'blue-grey-darken-1'
 }
+
+const isMenuOpen = ref(false)
+
+const resetMenuOpen = () => {
+  isMenuOpen.value = false
+}
 </script>
 
 <template>
   <div class="custom-container relative h-screen w-screen">
     <div
-      class="btn-group absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-10"
+      class="btn-group fixed right-7 top-1/2 z-10 -translate-y-1/2 rounded-full"
     >
+      <!-- menu-btn -->
+      <button
+        class="menu-btn size-14 rounded-full"
+        @click="() => (isMenuOpen = !isMenuOpen)"
+      >
+        <v-icon icon="mdi-apps" size="x-large"></v-icon>
+      </button>
+      <!-- other-btn -->
       <NuxtLink to="/">
-        <button class="btn relative rounded-2xl p-8" data-content="主頁">
+        <button
+          v-show="isMenuOpen"
+          class="btn btn-home rounded-full p-6"
+          data-content="主頁"
+          @click="resetMenuOpen"
+        >
           <v-icon icon="mdi-home" size="x-large" :color="getIconColor('/')" />
         </button>
       </NuxtLink>
       <NuxtLink to="/shop">
         <button
-          class="btn relative rounded-2xl p-8"
+          v-show="isMenuOpen"
+          class="btn btn-shop rounded-full p-6"
           data-content="植宇宙雜貨店"
+          @click="resetMenuOpen"
         >
           <v-icon
             icon="mdi-gift"
@@ -29,7 +50,12 @@ const getIconColor = (path: string) => {
         </button>
       </NuxtLink>
       <NuxtLink to="/shopping-cart">
-        <button class="btn relative rounded-2xl p-8" data-content="購物車">
+        <button
+          v-show="isMenuOpen"
+          class="btn btn-cart rounded-full p-6"
+          data-content="購物車"
+          @click="resetMenuOpen"
+        >
           <v-icon
             icon="mdi-cart-variant"
             size="x-large"
@@ -38,7 +64,12 @@ const getIconColor = (path: string) => {
         </button>
       </NuxtLink>
       <NuxtLink to="/article">
-        <button class="btn relative rounded-2xl p-8" data-content="植宇宙手札">
+        <button
+          v-show="isMenuOpen"
+          class="btn btn-article rounded-full p-6"
+          data-content="植宇宙手札"
+          @click="resetMenuOpen"
+        >
           <v-icon
             icon="mdi-book-open-page-variant"
             size="x-large"
@@ -47,12 +78,13 @@ const getIconColor = (path: string) => {
         </button>
       </NuxtLink>
     </div>
+
     <slot />
   </div>
 </template>
 
 <style scoped lang="scss">
-@mixin tooltip {
+/* @mixin tooltip {
   content: attr(data-content);
   position: absolute;
   top: 102%;
@@ -66,10 +98,34 @@ const getIconColor = (path: string) => {
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
+} */
+
+.menu-btn {
+  box-shadow:
+    -6px -6px 16px rgb(255 255 255),
+    3px 3px 6px rgb(0 0 0 / 30%);
+
+  &:hover {
+    box-shadow:
+      -3px -3px 6px rgb(255 255 255),
+      1px 1px 6px rgb(0 0 0 / 30%);
+  }
+
+  &::after {
+    /* @include tooltip; */
+
+    width: calc(100% + 3rem);
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
 }
 
 .btn {
   background-color: transparent;
+  position: absolute;
+  /* transition: ease-in-out 0.3s; */
 
   &:hover {
     background-color: #e0e0e0;
@@ -83,5 +139,29 @@ const getIconColor = (path: string) => {
   &:hover::after {
     opacity: 1;
   }
+}
+
+.btn-home {
+  left: -66%;
+  top: -200%;
+  /* transition-delay: 0.1s; */
+}
+
+.btn-shop {
+  left: -200%;
+  top: -100%;
+  /* transition-delay: 0.2s; */
+}
+
+.btn-cart {
+  left: -200%;
+  bottom: -100%;
+  /* transition-delay: 0.3s; */
+}
+
+.btn-article {
+  left: -66%;
+  bottom: -200%;
+  /* transition-delay: 0.4s; */
 }
 </style>

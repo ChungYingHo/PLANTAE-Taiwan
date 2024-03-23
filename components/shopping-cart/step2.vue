@@ -30,14 +30,14 @@ const phoneRules = [
   }
 ]
 
-const emailRules = [
-  (value: string) => {
-    if (!value || value === '') return true
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (regex.test(value)) return true
-    return 'Invalid email address.'
-  }
-]
+// const emailRules = [
+//   (value: string) => {
+//     if (!value || value === '') return true
+//     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+//     if (regex.test(value)) return true
+//     return 'Invalid email address.'
+//   }
+// ]
 
 watch([userName, userAddress, userPhone, userEmail, userDelivery], () => {
   useCart.cartData.name = userName.value
@@ -51,6 +51,7 @@ watch([userName, userAddress, userPhone, userEmail, userDelivery], () => {
 
 <template>
   <div>
+    <p class="mb-5 text-xl">收件資訊</p>
     <div class="mb-3 flex gap-5">
       <v-text-field
         v-model="userName"
@@ -63,12 +64,12 @@ watch([userName, userAddress, userPhone, userEmail, userDelivery], () => {
         :rules="phoneRules"
       ></v-text-field>
     </div>
-    <v-text-field
+    <!-- <v-text-field
       v-model="userEmail"
       label="E-mail"
       :rules="emailRules"
       class="mb-3"
-    ></v-text-field>
+    ></v-text-field> -->
     <v-text-field
       v-model="userAddress"
       label="收件地址"
@@ -76,9 +77,11 @@ watch([userName, userAddress, userPhone, userEmail, userDelivery], () => {
       class="mb-3"
     ></v-text-field>
     <div>
-      <p>選擇配送方式</p>
-      <v-radio-group v-model="userDelivery">
-        <v-radio label="免費 - 一般配送" :value="0"></v-radio>
+      <v-radio-group v-model="userDelivery" inline>
+        <template #label>
+          <p>選擇配送方式</p>
+        </template>
+        <v-radio label="免費 - 一般配送" :value="0" class="mr-16"></v-radio>
         <v-radio label="+300 - 冷藏配送" :value="1"></v-radio>
       </v-radio-group>
     </div>

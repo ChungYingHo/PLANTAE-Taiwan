@@ -51,7 +51,6 @@ watch([userName, userAddress, userPhone, userEmail, userDelivery], () => {
 
 <template>
   <div>
-    <p class="mb-5 text-xl">收件資訊</p>
     <div class="mb-3 flex gap-5">
       <v-text-field
         v-model="userName"
@@ -77,7 +76,7 @@ watch([userName, userAddress, userPhone, userEmail, userDelivery], () => {
       class="mb-3"
     ></v-text-field>
     <div>
-      <v-radio-group v-model="userDelivery" inline>
+      <v-radio-group v-model="userDelivery">
         <template #label>
           <p>選擇配送方式</p>
         </template>

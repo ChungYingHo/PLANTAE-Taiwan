@@ -25,60 +25,67 @@ const resetMenuOpen = () => {
         <v-icon icon="mdi-apps" size="x-large"></v-icon>
       </button>
       <!-- other-btn -->
+
       <NuxtLink to="/">
-        <button
-          v-show="isMenuOpen"
-          class="btn btn-home rounded-full p-6"
-          data-content="主頁"
-          @click="resetMenuOpen"
-        >
-          <v-icon icon="mdi-home" size="x-large" :color="getIconColor('/')" />
-        </button>
+        <Transition>
+          <button
+            v-show="isMenuOpen"
+            class="btn btn-home rounded-full p-6"
+            data-content="主頁"
+            @click="resetMenuOpen"
+          >
+            <v-icon icon="mdi-home" size="x-large" :color="getIconColor('/')" />
+          </button>
+        </Transition>
       </NuxtLink>
+
       <NuxtLink to="/shop">
-        <button
-          v-show="isMenuOpen"
-          class="btn btn-shop rounded-full p-6"
-          data-content="植宇宙雜貨店"
-          @click="resetMenuOpen"
-        >
-          <v-icon
-            icon="mdi-gift"
-            size="x-large"
-            :color="getIconColor('/shop')"
-          />
-        </button>
+        <Transition
+          ><button
+            v-show="isMenuOpen"
+            class="btn btn-shop rounded-full p-6"
+            data-content="植宇宙雜貨店"
+            @click="resetMenuOpen"
+          >
+            <v-icon
+              icon="mdi-gift"
+              size="x-large"
+              :color="getIconColor('/shop')"
+            /></button
+        ></Transition>
       </NuxtLink>
       <NuxtLink to="/shopping-cart">
-        <button
-          v-show="isMenuOpen"
-          class="btn btn-cart rounded-full p-6"
-          data-content="購物車"
-          @click="resetMenuOpen"
-        >
-          <v-icon
-            icon="mdi-cart-variant"
-            size="x-large"
-            :color="getIconColor('/shopping-cart')"
-          />
-        </button>
+        <Transition
+          ><button
+            v-show="isMenuOpen"
+            class="btn btn-cart rounded-full p-6"
+            data-content="購物車"
+            @click="resetMenuOpen"
+          >
+            <v-icon
+              icon="mdi-cart-variant"
+              size="x-large"
+              :color="getIconColor('/shopping-cart')"
+            /></button
+        ></Transition>
       </NuxtLink>
       <NuxtLink to="/article">
-        <button
-          v-show="isMenuOpen"
-          class="btn btn-article rounded-full p-6"
-          data-content="植宇宙手札"
-          @click="resetMenuOpen"
-        >
-          <v-icon
-            icon="mdi-book-open-page-variant"
-            size="x-large"
-            :color="getIconColor('/article')"
-          />
-        </button>
+        <Transition
+          ><button
+            v-show="isMenuOpen"
+            class="btn btn-article rounded-full p-6"
+            data-content="植宇宙手札"
+            @click="resetMenuOpen"
+          >
+            <v-icon
+              icon="mdi-book-open-page-variant"
+              size="x-large"
+              :color="getIconColor('/article')"
+            /></button
+        ></Transition>
       </NuxtLink>
     </div>
-
+    <!-- slot here -->
     <slot />
   </div>
 </template>
@@ -163,5 +170,15 @@ const resetMenuOpen = () => {
   left: -66%;
   bottom: -200%;
   /* transition-delay: 0.4s; */
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

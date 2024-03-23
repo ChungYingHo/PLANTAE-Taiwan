@@ -11,7 +11,6 @@ const useCart = useCartStore()
 
 <template>
   <div class="flex h-full flex-col">
-    <p class="mb-5 text-xl">商品確認</p>
     <div class="flex-1 overflow-auto">
       <v-row
         v-for="(item, index) in useCart.cartData.products"
@@ -45,7 +44,7 @@ const useCart = useCartStore()
         >
       </v-row>
     </div>
-
+    <!-- total cost -->
     <p class="total text-end">總額：{{ useCart.totalPrice }}</p>
   </div>
 </template>

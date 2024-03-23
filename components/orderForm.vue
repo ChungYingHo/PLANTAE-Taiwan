@@ -14,7 +14,7 @@ const currentStep = shallowRef(step1)
 const changeProgressColor = (step: number) => {
   return stepProgress.value >= step
     ? 'blue-grey-darken-1'
-    : 'blue-grey-lighten-4'
+    : 'blue-grey-lighten-5'
 }
 
 const changeProgressIcon = (step: number) => {
@@ -42,6 +42,23 @@ const updateCurrentStep = () => {
       break
     default:
       break
+  }
+}
+
+const stepName = () => {
+  switch (stepProgress.value) {
+    case 1:
+      return '商品確認'
+    case 2:
+      return '寄送資訊'
+    case 3:
+      return '付款方式'
+    case 4:
+      return '備註'
+    case 5:
+      return '最終確認'
+    default:
+      return ''
   }
 }
 
@@ -127,55 +144,59 @@ const handlePrevStep = () => {
 </script>
 
 <template>
-  <div class="form-container flex h-full flex-col justify-around gap-2">
+  <div class="form-container flex h-full flex-col">
     <!-- 進度條 -->
-    <div class="form-progress flex items-center justify-center gap-5 py-3">
-      <v-icon
-        :icon="changeProgressIcon(1)"
-        size="x-large"
-        :color="changeProgressColor(1)"
-      />
-      <v-icon
-        icon="mdi-pan-right"
-        size="large"
-        :color="changeProgressColor(1)"
-      />
-      <v-icon
-        :icon="changeProgressIcon(2)"
-        size="x-large"
-        :color="changeProgressColor(2)"
-      />
-      <v-icon
-        icon="mdi-pan-right"
-        size="large"
-        :color="changeProgressColor(2)"
-      />
-      <v-icon
-        :icon="changeProgressIcon(3)"
-        size="x-large"
-        :color="changeProgressColor(3)"
-      />
-      <v-icon
-        icon="mdi-pan-right"
-        size="large"
-        :color="changeProgressColor(3)"
-      />
-      <v-icon
-        :icon="changeProgressIcon(4)"
-        size="x-large"
-        :color="changeProgressColor(4)"
-      />
-      <v-icon
-        icon="mdi-pan-right"
-        size="large"
-        :color="changeProgressColor(4)"
-      />
-      <v-icon
-        :icon="changeProgressIcon(5)"
-        size="x-large"
-        :color="changeProgressColor(5)"
-      />
+    <div class="form-progress flex flex-col gap-1">
+      <div class="flex items-center justify-center gap-5 py-3">
+        <v-icon
+          :icon="changeProgressIcon(1)"
+          size="x-large"
+          :color="changeProgressColor(1)"
+        />
+        <v-icon
+          icon="mdi-pan-right"
+          size="large"
+          :color="changeProgressColor(1)"
+        />
+        <v-icon
+          :icon="changeProgressIcon(2)"
+          size="x-large"
+          :color="changeProgressColor(2)"
+        />
+        <v-icon
+          icon="mdi-pan-right"
+          size="large"
+          :color="changeProgressColor(2)"
+        />
+        <v-icon
+          :icon="changeProgressIcon(3)"
+          size="x-large"
+          :color="changeProgressColor(3)"
+        />
+        <v-icon
+          icon="mdi-pan-right"
+          size="large"
+          :color="changeProgressColor(3)"
+        />
+        <v-icon
+          :icon="changeProgressIcon(4)"
+          size="x-large"
+          :color="changeProgressColor(4)"
+        />
+        <v-icon
+          icon="mdi-pan-right"
+          size="large"
+          :color="changeProgressColor(4)"
+        />
+        <v-icon
+          :icon="changeProgressIcon(5)"
+          size="x-large"
+          :color="changeProgressColor(5)"
+        />
+      </div>
+      <p class="text-lg">{{ stepName() }}</p>
     </div>
+
     <!-- 表單 -->
     <div class="form-content flex-1 pb-5">
       <KeepAlive>
@@ -184,7 +205,7 @@ const handlePrevStep = () => {
     </div>
     <!-- 下一步 -->
     <div
-      class="form-btn-group mb-5 flex"
+      class="form-btn-group mb-5 flex items-center"
       :class="{
         'justify-end': stepProgress === 1,
         'justify-between': stepProgress > 1
@@ -221,5 +242,15 @@ const handlePrevStep = () => {
 </template>
 
 <style scoped lang="scss">
-/* .. */
+.form-progress {
+  height: 15vh;
+}
+
+.form-content {
+  height: 65vh;
+}
+
+.form-btn-group {
+  height: 10vh;
+}
 </style>

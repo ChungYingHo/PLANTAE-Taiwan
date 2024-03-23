@@ -43,7 +43,6 @@ watch([paySelect, introducerName, payAccount, payImage], () => {
 
 <template>
   <div>
-    <p class="mb-5 text-xl">付款資訊</p>
     <v-alert
       :text="'總額：' + useCart.totalPrice"
       type="info"

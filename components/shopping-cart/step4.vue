@@ -12,7 +12,6 @@ watch(userNote, () => {
 
 <template>
   <div>
-    <p class="mb-5 text-xl">備註</p>
     <v-textarea
       v-model="userNote"
       label="留下您想說的話吧！ (選填)"

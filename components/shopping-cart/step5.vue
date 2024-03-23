@@ -6,7 +6,6 @@ const useCart = useCartStore()
 
 <template>
   <div>
-    <p class="mb-5 text-xl">訂單確認</p>
     <v-card class="px-5">
       <p class="my-2 text-lg">
         訂購商品：<span

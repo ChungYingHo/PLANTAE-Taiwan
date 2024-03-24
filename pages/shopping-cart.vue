@@ -23,7 +23,9 @@ definePageMeta({
 
 <style scoped lang="scss">
 .cart-container {
-  background-color: #c0c0c0;
+  background: url('@/assets/images/bg-green.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .cart-sub-container {

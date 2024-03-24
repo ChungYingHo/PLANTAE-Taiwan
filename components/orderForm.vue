@@ -13,8 +13,8 @@ const currentStep = shallowRef(step1)
 
 const changeProgressColor = (step: number) => {
   return stepProgress.value >= step
-    ? 'blue-grey-darken-1'
-    : 'blue-grey-lighten-5'
+    ? 'blue-grey-darken-3'
+    : 'blue-grey-lighten-3'
 }
 
 const changeProgressIcon = (step: number) => {

@@ -10,8 +10,14 @@ const useCart = useCartStore()
       <p class="my-2 text-lg">
         訂購商品：<span
           v-for="(item, index) in useCart.cartData.products"
-          :key="item.name"
-          >{{ item.name }}
+          :key="
+            //@ts-ignore
+            item.name
+          "
+          >{{
+            //@ts-ignore
+            item.name
+          }}
           {{ index !== useCart.cartData.products.length - 1 ? ' / ' : ' ' }}
         </span>
       </p>

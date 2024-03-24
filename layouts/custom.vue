@@ -22,7 +22,11 @@ const resetMenuOpen = () => {
         class="menu-btn size-14 rounded-full"
         @click="() => (isMenuOpen = !isMenuOpen)"
       >
-        <v-icon icon="mdi-apps" size="x-large"></v-icon>
+        <v-icon
+          icon="mdi-apps"
+          size="x-large"
+          color="blue-grey-darken-1"
+        ></v-icon>
       </button>
       <!-- other-btn -->
 
@@ -135,7 +139,7 @@ const resetMenuOpen = () => {
   /* transition: ease-in-out 0.3s; */
 
   &:hover {
-    background-color: #e0e0e0;
+    background-color: rgb(#e0e0e0, 0.3);
   }
 
   &::after {

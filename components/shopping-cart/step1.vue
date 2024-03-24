@@ -11,20 +11,34 @@ const useCart = useCartStore()
 
 <template>
   <div class="flex h-full flex-col">
-    <div class="flex-1 overflow-auto">
+    <div
+      v-if="useCart.cartData.products.length > 0"
+      class="flex-1 overflow-auto"
+    >
       <v-row
         v-for="(item, index) in useCart.cartData.products"
-        :key="item.name"
+        :key="
+          //@ts-ignore
+          item.name
+        "
         class="text-center"
       >
         <v-col cols="2" class="flex items-center justify-start"
           ><img
-            :src="item.name === '愛文芒果 (箱 / 10斤)' ? mango : mangoDry"
+            :src="
+              //@ts-ignore
+              item.name.includes('愛文芒果') ? mango : mangoDry
+            "
             alt="product"
             class="h-20 w-20 rounded-lg"
         /></v-col>
         <v-col cols="4" class="flex items-center justify-start"
-          ><p>{{ item.name }}</p></v-col
+          ><p>
+            {{
+              //@ts-ignore
+              item.name + ' - ' + item.unitName
+            }}
+          </p></v-col
         >
         <v-col cols="3" class="flex items-center justify-between">
           <v-btn
@@ -32,7 +46,12 @@ const useCart = useCartStore()
             icon="mdi-minus"
             @click="useCart.changeProductQuantity(false, index)"
           ></v-btn>
-          <p>{{ item.quantity }}</p>
+          <p>
+            {{
+              //@ts-ignore
+              item.quantity
+            }}
+          </p>
           <v-btn
             density="compact"
             icon="mdi-plus"
@@ -40,12 +59,25 @@ const useCart = useCartStore()
           ></v-btn
         ></v-col>
         <v-col cols="3" class="flex items-center justify-end"
-          ><p>金額：{{ item.quantity * item.perPrice }}</p></v-col
+          ><p>
+            金額：{{
+              //@ts-ignore
+              item.quantity * item.perPrice
+            }}
+          </p></v-col
         >
       </v-row>
     </div>
     <!-- total cost -->
-    <p class="total text-end">總額：{{ useCart.totalPrice }}</p>
+    <p v-if="useCart.cartData.products.length > 0" class="total text-end">
+      總額：{{ useCart.totalPrice }}
+    </p>
+    <div
+      v-if="useCart.cartData.products.length === 0"
+      class="mt-10 flex items-center justify-center"
+    >
+      <p>您尚未選購任何商品</p>
+    </div>
   </div>
 </template>
 

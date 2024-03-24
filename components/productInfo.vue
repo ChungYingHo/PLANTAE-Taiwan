@@ -44,7 +44,14 @@ const handleSubmit = (list: any[], itemName: string) => {
   console.log(useCart.cartData.products)
 }
 
-onMounted(() => (currentIndex.value = 0))
+onMounted(() => {
+  currentIndex.value = 0
+  useProduct.fruitProducts.forEach((item) => {
+    item.unit.forEach((unit) => {
+      unit.quantity = 0
+    })
+  })
+})
 </script>
 
 <template>

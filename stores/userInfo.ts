@@ -1,6 +1,3 @@
-import { useProductStore } from '@/stores/productInfo'
-const useProduct = useProductStore()
-
 export const useCartStore = defineStore('cart', () => {
   const cartData = reactive({
     name: '',
@@ -11,7 +8,7 @@ export const useCartStore = defineStore('cart', () => {
     paySelect: 0,
     introducer: '',
     payAccount: '',
-    payImg: File,
+    payImg: undefined,
     note: '',
     products: [
       // {
@@ -36,33 +33,17 @@ export const useCartStore = defineStore('cart', () => {
 
   const changeProductQuantity = (flag: boolean, index: number) => {
     if (cartData.products.length > 0) {
-      // @ts-ignore
-      const name = cartData.products[index].name
-      const nameIndex = useProduct.fruitProducts.findIndex(
-        (product) => product.name === name
-      )
-      console.log(name)
-      console.log(nameIndex)
-      // @ts-ignore
-      const unitName = cartData.products[index].unitName
-      const unitIndex = useProduct.fruitProducts[nameIndex].unit.findIndex(
-        (unit) => unit.unitName === unitName
-      )
-      console.log(unitName)
-      console.log(unitIndex)
       if (flag) {
         // @ts-ignore
         if (cartData.products[index].quantity < 10) {
           // @ts-ignore
           cartData.products[index].quantity++
-          useProduct.fruitProducts[nameIndex].unit[index].quantity++
         }
       } else {
         // @ts-ignore
         if (cartData.products[index].quantity >= 1) {
           // @ts-ignore
           cartData.products[index].quantity--
-          useProduct.fruitProducts[nameIndex].unit[index].quantity--
           // @ts-ignore
           if (cartData.products[index].quantity === 0) {
             cartData.products.splice(index, 1)

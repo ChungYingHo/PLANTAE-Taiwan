@@ -1,1 +1,0 @@
-import{f as o,o as s,c as e}from"./entry.XnCf5ET4.js";import{_ as t}from"./_plugin-vue_export-helper.DlAUqK2U.js";const a={class:"shop-container"},c=o({__name:"shop",setup(_){return(n,p)=>(s(),e("div",a,"shop"))}}),f=t(c,[["__scopeId","data-v-2a0857a9"]]);export{f as default};

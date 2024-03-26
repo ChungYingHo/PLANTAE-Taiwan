@@ -1,9 +1,23 @@
 <script setup lang="ts">
 import { useProductStore } from '@/stores/productInfo'
+import Swal from 'sweetalert2'
 const useProduct = useProductStore()
 const { currentIndex } = storeToRefs(useProduct)
 import { useCartStore } from '@/stores/userInfo'
 const useCart = useCartStore()
+
+const Toast = Swal.mixin({
+  toast: true,
+  // eslint-disable-next-line prettier/prettier
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer
+    toast.onmouseleave = Swal.resumeTimer
+  }
+})
 
 const handleSubmit = (list: any[], itemName: string) => {
   const data = reactive<any>([])
@@ -42,6 +56,12 @@ const handleSubmit = (list: any[], itemName: string) => {
   })
 
   console.log(useCart.cartData.products)
+  Toast.fire({
+    // eslint-disable-next-line prettier/prettier
+    icon: "success",
+    // eslint-disable-next-line prettier/prettier
+    title: "已加入購物車"
+  })
 }
 
 onMounted(() => {

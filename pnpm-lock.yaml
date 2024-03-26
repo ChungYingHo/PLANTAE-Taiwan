@@ -20,6 +20,9 @@ dependencies:
   sass:
     specifier: ^1.72.0
     version: 1.72.0
+  sweetalert2:
+    specifier: ^11.10.7
+    version: 11.10.7
   vue:
     specifier: ^3.4.21
     version: 3.4.21(typescript@5.4.2)
@@ -7319,6 +7322,10 @@ packages:
       css-what: 6.1.0
       csso: 5.0.5
       picocolors: 1.0.0
+    dev: false
+
+  /sweetalert2@11.10.7:
+    resolution: {integrity: sha512-5Jlzrmaitay6KzU+2+LhYu9q+L4v/dZ8oZyEDH14ep0C/QilCnFLHmqAyD/Lhq/lm5DiwsOs6Tr58iv8k3wyGg==}
     dev: false
 
   /synckit@0.8.8:

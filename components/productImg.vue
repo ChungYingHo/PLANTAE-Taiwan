@@ -10,10 +10,10 @@ const entering = ref<boolean>(false)
 function changeImage(index: number) {
   if (index !== currentImgIndex.value) {
     leaving.value = true
+    currentImgIndex.value = index
     setTimeout(() => {
-      currentImgIndex.value = index
       entering.value = true
-    }, 300) // 動畫持續時間為 0.3 秒
+    }, 500) // 動畫持續時間為 0.5 秒
   }
 }
 
@@ -71,10 +71,12 @@ watch(currentImgIndex, (newIndex) => {
 
 .leaving {
   transform: translateY(-150%);
+  opacity: 0.2;
 }
 
 .entering {
   transform: translateY(0);
+  opacity: 1;
 }
 
 .product-img-btn {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Swal from 'sweetalert2'
 import step1 from './shopping-cart/step1.vue'
 import step2 from './shopping-cart/step2.vue'
 import step3 from './shopping-cart/step3.vue'
@@ -10,6 +11,26 @@ const useCart = useCartStore()
 
 const stepProgress = ref<number>(1)
 const currentStep = shallowRef(step1)
+
+const Toast = Swal.mixin({
+  toast: true,
+  // eslint-disable-next-line prettier/prettier
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer
+    toast.onmouseleave = Swal.resumeTimer
+  }
+})
+
+function showToast(icon: any, title: any) {
+  Toast.fire({
+    icon: icon,
+    title: title
+  })
+}
 
 const changeProgressColor = (step: number) => {
   return stepProgress.value >= step
@@ -109,6 +130,8 @@ const validPay = (
 const handleNextStep = () => {
   if (stepProgress.value === 1) {
     if (!validProduct(useCart.cartData.products)) {
+      // eslint-disable-next-line prettier/prettier
+      showToast("error", "請選擇商品")
       return
     }
   }
@@ -118,6 +141,8 @@ const handleNextStep = () => {
       !validAddress(useCart.cartData.address) ||
       !validPhone(useCart.cartData.phone)
     ) {
+      // eslint-disable-next-line prettier/prettier
+      showToast("error", "請填寫完整資料")
       return
     }
   }
@@ -129,6 +154,8 @@ const handleNextStep = () => {
         useCart.cartData.payAccount
       )
     ) {
+      // eslint-disable-next-line prettier/prettier
+      showToast("error", "請填寫完整資料")
       return
     }
   }

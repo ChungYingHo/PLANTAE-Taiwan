@@ -27,7 +27,7 @@ export const useCartStore = defineStore('cart', () => {
         // @ts-ignore
         total += product.perPrice * product.quantity
       }
-      return total + cartData.delivery
+      return cartData.delivery === 0 ? total : total + 300
     }
   })
 
